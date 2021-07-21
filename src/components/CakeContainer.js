@@ -35,3 +35,6 @@ export default connect(
     mapStateToProps, 
     mapDispatchToProps
 )(CakeContainer);
+
+// React Redux + Hooks is aliternative to the existing connect higher-order component
+// Subscribe to store and dispatch actions without connect()
