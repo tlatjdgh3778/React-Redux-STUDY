@@ -2,13 +2,17 @@
 
 // 1. Create redux store
 import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 // import cakeReducer from './cake/cakeReducer';
 import rootReducer from './rootReducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import logger from 'redux-logger';
 
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(logger))) // createStore method accepts a reducer function as its parameter
+const store = createStore(
+    rootReducer, 
+    composeWithDevTools(applyMiddleware(logger, thunk))) 
+    // createStore method accepts a reducer function as its parameter
 
 export default store;
 

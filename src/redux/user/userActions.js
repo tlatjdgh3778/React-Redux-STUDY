@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { 
     FETCH_USERS_FAILURE, 
     FETCH_USERS_REQUEST, 
@@ -21,5 +22,23 @@ export const fetchUsersFailure = error => {
     return {
         type: FETCH_USERS_FAILURE,
         payload: error
+    }
+}
+
+// fetchUsers action creator is use thunk middleware
+// return another function not obj
+export const fetchUsers = () => {
+    return (dispatch) => {
+        dispatch(fetchUsersRequest)
+        // side effect
+        axios.get('https://jsonplaceholder.typicode.com/users')
+            .then(response => {
+                const users = response.data
+                dispatch(fetchUsersSuccess(users))
+            })
+            .catch(error => {
+                const errorMsg = error.message
+                dispatch(fetchUsersFailure(errorMsg))
+            })
     }
 }
